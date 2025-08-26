@@ -2,7 +2,7 @@
 
 A collection of mini-projects for learning software testing, including Unit, Integration, End-to-End (E2E), Regression, and Manual/Exploratory testing using React frontend with multiple backends (Express, FastAPI, Laravel).
 
-Each project runs in its own Docker Compose environment for isolated, reproducible setups.
+Each project runs in its own Docker Compose environment, ensuring isolated and reproducible setups.
 
 ## Goals
 
@@ -45,19 +45,38 @@ testing-mini-projects/
 │   │   ├── unit/
 │   │   ├── integration/
 │   │   ├── e2e/
-│   │   └── regression/
+│   │   |── regression/
 │   ├── manual-tests/         # manual & exploratory guides
 │   │   ├── test-cases.md
-│   │   └── exploratory-guide.md
-│   └── docker-compose.yml
+│   │   |── exploratory-guide.md
+│   |── docker-compose.yml
 │
 ├── todo-app-fastapi-react/
-│   └── ...
+│   |── ...
 │
 ├── todo-app-laravel-react/
-│   └── ...
+│   |── ...
 │
-└── README.md                 # this file
+chat-app-express-react/
+│   ├── backend/
+│   ├── frontend/
+│   ├── tests/
+│   │   ├── unit/
+│   │   ├── integration/
+│   │   ├── e2e/
+│   │   |── regression/
+│   ├── manual-tests/
+│   │   ├── test-cases.md
+│   │   |── exploratory-guide.md
+│   |── docker-compose.yml
+│
+├── chat-app-fastapi-react/
+│   ── ...
+│
+├── chat-app-laravel-react/
+│   |── ...
+│
+|── README.md
 ```
 
 ## What I am going to learn
@@ -78,23 +97,34 @@ testing-mini-projects/
 
 ## Roadmap
 
-- Project 1: Task Manager (React + Express)
-- Project 2: Task Manager (React + FastAPI)
-- Project 3: Task Manager (React + Laravel)
-- Project 4: Auth Flow (React + Express)
-- Project 5: Auth Flow (React + FastAPI)
-- Project 6: Auth Flow (React + Laravel)
-- Extend with CI/CD pipelines (GitHub Actions + test automation)
+### Step 1
+- Project 1: Todo App (React + Express)
+- Project 2: Todo App (React + FastAPI)
+- Project 3: Todo App (React + Laravel)
+
+### Step 2
+- Project 4: Chat App (React + Express)
+- Project 5: Chat App (React + FastAPI)
+- Project 6: Chat App (React + Laravel)
+
+### Step 3
+- Extend the above apps with test automation
+- Extend the above apps with CI/CD pipelines (GitHub Actions)
 - Add advanced exploratory testing guides
 
 ## Getting Started
 
-Clone the repo and start with the first project:
+- Clone the repo and start with the first project:
 
 ```
-git clone https://github.com/hamid6426/learn-software-testing.git
-cd testing-mini-projects/todo-app-express-react
-docker compose up --build
+git clone https://github.com/hamid6426/learn-software-testing
+cd learn-software-testing/todo-app-express-react # or any other mini project
+
+# Build the services
+docker compose build
+
+# Start the services in the background
+docker compose up -d
 ```
 
-Then open the manual test cases and begin testing.
+- Then open the manual test cases and begin testing.
