@@ -38,7 +38,7 @@ Each project runs in its own Docker Compose environment for isolated, reproducib
 ```
 testing-mini-projects/
 │
-├── task-manager-express-react/
+├── todo-app-express-react/
 │   ├── backend/              # Express backend
 │   ├── frontend/             # React frontend
 │   ├── tests/                # automated test suites
@@ -51,10 +51,10 @@ testing-mini-projects/
 │   │   └── exploratory-guide.md
 │   └── docker-compose.yml
 │
-├── task-manager-fastapi-react/
+├── todo-app-fastapi-react/
 │   └── ...
 │
-├── task-manager-laravel-react/
+├── todo-app-laravel-react/
 │   └── ...
 │
 └── README.md                 # this file
@@ -93,7 +93,7 @@ Clone the repo and start with the first project:
 
 ```
 git clone https://github.com/hamid6426/learn-software-testing.git
-cd testing-mini-projects/task-manager-express-react
+cd testing-mini-projects/todo-app-express-react
 docker compose up --build
 ```
 
