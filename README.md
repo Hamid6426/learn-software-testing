@@ -8,6 +8,7 @@ Each project runs in its own Docker Compose environment, ensuring isolated and r
 
 - Learn manual testing discipline (test cases, exploratory testing).
 - Learn automated testing at all levels:
+
   - Unit
   - Integration
   - E2E
@@ -98,16 +99,19 @@ chat-app-express-react/
 ## Roadmap
 
 ### Step 1
+
 - Project 1: Todo App (React + Express)
 - Project 2: Todo App (React + FastAPI)
 - Project 3: Todo App (React + Laravel)
 
 ### Step 2
+
 - Project 4: Chat App (React + Express)
 - Project 5: Chat App (React + FastAPI)
 - Project 6: Chat App (React + Laravel)
 
 ### Step 3
+
 - Extend the above apps with test automation
 - Extend the above apps with CI/CD pipelines (GitHub Actions)
 - Add advanced exploratory testing guides
