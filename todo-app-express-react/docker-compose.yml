@@ -16,7 +16,7 @@ services:
       - HOST=0.0.0.0
     networks:
       - app-network
-    command: nodemon index.js
+    command: nodemon --watch . --legacy-watch index.js
     healthcheck:
       test:
         ["CMD-SHELL", "wget --spider -q http://localhost:8000/health || exit 1"]
@@ -41,6 +41,8 @@ services:
     environment:
       - VITE_PORT=5173
       - VITE_HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
     networks:
       - app-network
     command: npm run dev -- --host --port 5173

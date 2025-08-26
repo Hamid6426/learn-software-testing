@@ -1,15 +1,20 @@
+# Use official Node image
 FROM node:20-alpine
 
+# Set working directory
 WORKDIR /app
 
+# Update Alpine packages
+RUN apk update && apk upgrade
+
+# Copy lockfile first to leverage Docker cache
+COPY package.json ./
+
 # Install dependencies
-COPY package*.json ./
 RUN npm install
+
 # Install nodemon globally for live reload
 RUN npm install -g nodemon
-
-# Copy source code
-COPY . .
 
 # Expose the backend port
 EXPOSE 8000

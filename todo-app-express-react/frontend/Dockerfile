@@ -4,12 +4,14 @@ FROM node:20-alpine
 # Set working directory
 WORKDIR /app
 
-# Install dependencies
-COPY package*.json ./
-RUN npm install
+# Update Alpine packages
+RUN apk update && apk upgrade
 
-# Copy source code
-COPY . .
+# Copy lockfile first to leverage Docker cache
+COPY package.json ./
+
+# Install dependencies
+RUN npm install
 
 # Expose Vite dev server port
 EXPOSE 5173
