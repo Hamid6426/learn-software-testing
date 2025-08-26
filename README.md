@@ -1,4 +1,4 @@
-# Testing Mini Projects
+# Learn Software Testing Using Mini Projects
 
 A collection of mini-projects for learning software testing, including Unit, Integration, End-to-End (E2E), Regression, and Manual/Exploratory testing using React frontend with multiple backends (Express, FastAPI, Laravel).
 
