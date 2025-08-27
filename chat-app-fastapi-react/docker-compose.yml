@@ -1,0 +1,58 @@
+services:
+  backend:
+    build: ./backend
+    container_name: express-backend
+    labels:
+      app: todo-app
+      role: backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=8000
+      - HOST=0.0.0.0
+    networks:
+      - app-network
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    healthcheck:
+      test:
+        ["CMD-SHELL", "wget --spider -q http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    build: ./frontend
+    container_name: react-frontend
+    labels:
+      app: todo-app
+      role: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_PORT=5173
+      - VITE_HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+    networks:
+      - app-network
+    command: npm run dev -- --host --port 5173
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:5173/ || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+networks:
+  app-network:
+    driver: bridge

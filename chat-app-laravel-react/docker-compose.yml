@@ -1,0 +1,78 @@
+services:
+  backend:
+    image: php:8.2-fpm
+    container_name: laravel-backend
+    labels:
+      app: chat-app
+      role: backend
+    working_dir: /var/www
+    volumes:
+      - ./backend:/var/www
+      - ./backend/vendor:/var/www/vendor
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=0dc9inUS3J+DpHJ9gynqmRBccdBy/WSsD8RjTd3b0EM=
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    depends_on:
+      - db
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:8000/ || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  db:
+    image: mysql:8.0
+    container_name: laravel-db
+    labels:
+      app: chat-app
+      role: db
+    environment:
+      MYSQL_DATABASE: chat_app_db
+      MYSQL_USER: hamid
+      MYSQL_PASSWORD: Hamid.123
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    container_name: react-frontend
+    labels:
+      app: todo-app
+      role: frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_PORT=5173
+      - VITE_HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+    networks:
+      - app-network
+    command: npm run dev -- --host --port 5173
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:5173/ || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+networks:
+  app-network:
+    driver: bridge

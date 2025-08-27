@@ -1,0 +1,6 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-multipart  # if you plan on handling files
+databases           # optional: if using async db
+sqlalchemy          # optional: if using ORM
