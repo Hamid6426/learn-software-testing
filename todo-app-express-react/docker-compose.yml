@@ -53,6 +53,27 @@ services:
       retries: 3
       start_period: 10s
 
+  db:
+    image: mongo:6.0
+    container_name: mongo-db
+    labels:
+      app: todo-app
+      role: db
+    environment:
+      MONGO_DATABASE: todo_app_db
+      MONGO_USER: hamid
+      MONGO_PASSWORD: Hamid.123
+      MONGO_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - todo-app-db-data:/var/lib/mongo
+    networks:
+      - app-network
+
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  todo-app-db-data:
